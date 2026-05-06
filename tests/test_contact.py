@@ -1,40 +1,49 @@
 from playwright.sync_api import Page, expect
+from pages.contact_page import ContactPage
 
 def test_complete_and_submit_the_contact_form_with_mandatory_fields(page: Page):
+
+    contact_page = ContactPage(page)
+
     print("Given la usuaria abre la página de contacto 'Contáctanos | Vida Verde'")
-    page.goto("https://web-qa.dev.adalab.es/contact")
+    contact_page.open_contact_page()
+
     print("When rellena el nombre")
-    page.get_by_role("textbox", name="Nombre *").fill("Marta Diaz")
+    contact_page.fill_contact_name("Marta Diaz")
+    
+
     print("And rellena el email")
-    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
+    contact_page.fill_contact_email("test@gmail.com")
+
     print("And rellena el mensaje")
-    page.get_by_role("textbox", name="Mensaje *").fill("test mensaje")
+    contact_page.fill_contact_message("test mensaje")
+
     print("And pulsa el boton enviar")
-    page.get_by_role("button", name="Enviar Mensaje").click()
+    contact_page.press_send_contact()
+
     print("Then debería ver un mensaje de éxito")
-    expect(page.get_by_role("heading", name="¡Mensaje enviado con éxito!")).to_be_visible()
+    contact_page.verify_message_form("¡Mensaje enviado con éxito!")
 
 
 
 def test_form_with_required_name_field_left_empty(page: Page):
+    contact_page = ContactPage(page)
     print("Given the users enters contact page 'Contact| Vida Verde'")
-    page.goto("https://web-qa.dev.adalab.es/contact")
+    contact_page.open_contact_page()
 
     print ("fills required email with 'test@gmail.com'")
-    page.get_by_role("textbox", name="Email *").fill("test@gmail.com")
+    contact_page.fill_contact_email("test@gmail.com")
    
     print ("fills required message with 'test mesage'")
-    page.get_by_role("textbox", name="Mensaje *").fill("test message")
-    page.get_by_role("textbox", name="Nombre *").click()
+    contact_page.fill_contact_message("test mensaje")
 
     print ("clicks send")
-    page.get_by_role("button", name="Enviar Mensaje").click()
+    contact_page.press_send_contact()
 
     print ("user should see the error message 'name is mandatory'")
-    expect(page.get_by_text("El nombre es obligatorio")).to_be_visible()
+    contact_page.verify_message_form("El nombre es obligatorio")
+  
 
-
-from playwright.sync_api import Page, expect
 
 def test_form_with_required_email_field_left_empty(page: Page):
 
