@@ -39,6 +39,13 @@ class ProductsPage:
         self.page.get_by_role("spinbutton", name="Precio máximo").fill(maximo)
 
     def verificar_mensaje_no_resultados(self):
-        expect(self.page.get_by_text("No se encontraron productos")).to_be_visible()            
+        expect(self.page.get_by_text("No se encontraron productos")).to_be_visible()      
+
+    
+    def añadir_producto(self, producto):
+        self.page.get_by_role("button", name=f"Añadir {producto} al carrito").click()
+
+    def limpiar_filtros(self):
+        self.page.get_by_role("button", name="Quitar filtros y ver todos").click()      
 
 
