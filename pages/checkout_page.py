@@ -5,17 +5,7 @@ class CheckoutPage:
     def __init__(self, page: Page):
         self.page = page
         self.url = 'https://web-qa.dev.adalab.es/checkout'
-        self.articulo = "palas"
-
-    def abrir_productos_page(self):
-        self.page.goto(self.url)
-
-    def filtrar_por_categoria(self, categoria): 
-        self.page.get_by_label("Categoría").select_option("Palas")
     
-    def añadir_producto(self, producto):
-        self.page.get_by_role("button", name=f"Añadir {"Juego de Palas al"} al carrito").click()
-
     def abrir_cart_page(self):
         self.page.goto(self.url)
 
