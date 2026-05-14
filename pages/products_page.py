@@ -43,7 +43,7 @@ class ProductsPage:
 
     
     def añadir_producto(self, producto):
-        self.page.get_by_role("button", name=f"Añadir {producto} al carrito").click()
+        self.page.get_by_role("button", name="Añadir " +producto+" al carrito").click()
 
     def limpiar_filtros(self):
         self.page.get_by_role("button", name="Quitar filtros y ver todos").click()      
