@@ -36,6 +36,6 @@ class Menu:
         if(self.isMobile()):
             #Mobile
             self.page.get_by_role("button", name=self.menu_mobile).click()
-            self.page.get_by_role("menuitem", name=self.menu_products).click()
+            self.page.get_by_role("menuitem", name=self.menu_contact).click()
         else:
             self.page.get_by_role("link", name= self.menu_contact).click()
