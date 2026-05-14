@@ -28,10 +28,14 @@ jobs:
       run: python -m playwright install --with-deps
 
     - name: Run tests on desktop
+      env:
+        PYTHONPATH: .
       run: |
         pytest --capture=tee-sys --html=resultsdesktop.html --self-contained-html --device="Desktop Chrome" --video=on
 
     - name: Run tests on mobile
+      env:
+        PYTHONPATH: .
       run: |
         pytest --capture=tee-sys --html=resultsmobile.html --self-contained-html --device="iPhone 12" --video=on
 
